@@ -1,32 +1,34 @@
-any-notify: クロス環境向け通知CLI
+any-notify: Cross-Environment Notification CLI
+
 =================================
 
-概要
-----
-`any-notify` は Codex-CLI 等から呼び出せる簡易通知コマンドです。GNOME (libnotify) を優先し、WSL2 では PowerShell のポップアップにフォールバックします。
+Overview
+--------
+`any-notify` is a lightweight notification command that can be invoked from tools like Codex-CLI. It prefers GNOME (libnotify), and on WSL2 it falls back to a PowerShell popup.
 
-インストール/実行方法
-----------------------
-- リポ内から直接実行:
+Install / Run
+-------------
+- Run directly from the repo:
   - `python -m any_notify --help`
-  - `python -m any_notify -t "タイトル" "本文"`
-- パスへ公開したい場合は、`pip install -e .` 後に `any-notify` コマンドが利用できます。
+  - `python -m any_notify -t "Title" "Body"`
+- If you want it on your PATH, run `pip install -e .` and then use the `any-notify` command.
 
-使用例
-------
-- 標準: `any-notify -t "Build" "完了しました"`
-- 重要度: `any-notify -u critical -t "警告" "ディスク残容量が少ない"`
-- タイムアウト(ms): `any-notify -T 5000 -t "情報" "自動クリーン完了"`
-- 明示バックエンド: `any-notify -b gdbus -t "タイトル" "本文"`
+Examples
+--------
+- Basic: `any-notify -t "Build" "Completed"`
+- Urgency: `any-notify -u critical -t "Warning" "Disk space is low"`
+- Timeout (ms): `any-notify -T 5000 -t "Info" "Auto cleanup finished"`
+- Explicit backend: `any-notify -b gdbus -t "Title" "Body"`
 
-バックエンド選択
-----------------
-1. `notify-send` があれば使用
-2. それ以外は `gdbus` (org.freedesktop.Notifications)
-3. WSL2の場合は PowerShell の COM Popup
-4. 最後に stdout 出力
+Backend Selection
+-----------------
+1. Use `notify-send` if available
+2. Otherwise use `gdbus` (org.freedesktop.Notifications)
+3. On WSL2, use PowerShell COM Popup
+4. Finally, print to stdout
 
-注意
-----
-- `notify-send`/`gdbus` は `libnotify`/`glib2` に含まれます。Arch/Ubuntuで導入してください。
-- WSL2 での PowerShell ポップアップはトーストではなく簡易ダイアログです。
+Notes
+-----
+- `notify-send`/`gdbus` are provided by `libnotify`/`glib2`. Install them on Arch/Ubuntu as needed.
+- On WSL2, the PowerShell popup is a simple dialog, not a toast notification.
+
