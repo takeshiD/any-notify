@@ -1,0 +1,13 @@
+[project]
+name = "any-notify"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = []
+
+[project.scripts]
+any-notify = "any_notify.cli:main"
+
+[dependency-groups]
+dev = []
